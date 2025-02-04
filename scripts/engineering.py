@@ -12,7 +12,8 @@ class FeatureEngineer:
 
 
         """
-        Aggregates daily data to quarterly data.
+        Aggregates daily data to quarterly data
+
         """
         # Convert dates to periods for aggregation
         orders["quarter"] = orders["date"].dt.to_period("Q")
@@ -24,6 +25,7 @@ class FeatureEngineer:
 
         # Aggregate transactions: Average indices per quarter
         transactions_agg = transactions.groupby("quarter").agg({
+
             "total_spend_index": "mean",
             "weekly_active_users_index": "mean"
         }).reset_index()
@@ -36,7 +38,8 @@ class FeatureEngineer:
     def normalize_features(self, quarterly_data):
 
         """
-        Normalizes features for better comparability.
+        Normalizes features for better comparability
+
         """
         # Add a spend-per-user feature
         quarterly_data["spend_per_user"] = (
@@ -49,6 +52,7 @@ class FeatureEngineer:
         # Load cleaned data
 
         orders = pd.read_csv(os.path.join(self.cleaned_data_path, "orders_cleaned.csv"))
+
         transactions = pd.read_csv(os.path.join(self.cleaned_data_path, "transactions_cleaned.csv"))
 
         # Convert date columns to datetime
@@ -58,6 +62,7 @@ class FeatureEngineer:
 
         # Aggregate and create features
         quarterly_data = self.aggregate_to_quarterly(orders, transactions)
+
         quarterly_data = self.normalize_features(quarterly_data)
 
         # Save engineered features
@@ -67,6 +72,7 @@ class FeatureEngineer:
 
 if __name__ == "__main__":
     cleaned_path = "../data/processed/"
+    
     output_path = "../data/processed/"
 
     engineer = FeatureEngineer(cleaned_path, output_path)

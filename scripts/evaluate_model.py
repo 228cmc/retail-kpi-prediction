@@ -6,12 +6,14 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error, m
 class ModelEvaluator:
     def __init__(self, model_path, features_path, revenue_path, output_path):
         """
-        Initializes the ModelEvaluator class.
+        Initializes the ModelEvaluator class
         Args:
         - model_path (str): Path to the saved model (pickle file).
-        - features_path (str): Path to the processed features dataset.
-        - revenue_path (str): Path to the revenue dataset (target values).
-        - output_path (str): Directory to save evaluation results.
+        - features_path (str): Path to the processed features dataset
+
+        - revenue_path (str): Path to the revenue dataset (target values)
+        - output_path (str): Directory to save evaluation results
+
         """
         self.model_path = model_path
         self.features_path = features_path
@@ -21,8 +23,9 @@ class ModelEvaluator:
     def load_test_data(self):
         """
         Loads and merges the test dataset (features + revenue).
+
         Returns:
-        - pd.DataFrame: The test dataset.
+        - pd.DataFrame: The test dataset
         """
         # Load features dataset
         features = pd.read_csv(self.features_path)
@@ -43,9 +46,10 @@ class ModelEvaluator:
 
     def load_model(self):
         """
-        Loads the trained model.
+        Loads the trained model
+
         Returns:
-        - Trained model object.
+        - Trained model object
         """
         if not os.path.exists(self.model_path):
             raise FileNotFoundError(f"The model file {self.model_path} does not exist.")
@@ -58,11 +62,12 @@ class ModelEvaluator:
         Evaluates the model on the test dataset.
         Args:
         - model: The trained model.
-        - test_data (pd.DataFrame): The test dataset.
+        - test_data (pd.DataFrame): The test dataset
         Returns:
-        - dict: Dictionary of evaluation metrics.
+        - dict: Dictionary of evaluation metrics
         """
         # Features used during training
+
         training_features = ["total_orders", "total_spend_index", "weekly_active_users_index", "spend_per_user"]
         
         # Ensure the test data contains only these features
@@ -74,13 +79,16 @@ class ModelEvaluator:
         y_test = test_data["revenue_index"]
 
         # Predictions
+
         y_pred = model.predict(X_test)
 
         # Metrics
         metrics = {
             "R2 Score": r2_score(y_test, y_pred),
             "Mean Absolute Error": mean_absolute_error(y_test, y_pred),
+
             "Mean Squared Error": mean_squared_error(y_test, y_pred),
+
             "Mean Absolute Percentage Error": mean_absolute_percentage_error(y_test, y_pred)
         }
 
@@ -88,9 +96,10 @@ class ModelEvaluator:
 
     def save_evaluation(self, metrics):
         """
-        Saves the evaluation results to a file.
+        Saves the evaluation results to a file
+
         Args:
-        - metrics (dict): Evaluation metrics.
+        - metrics (dict): Evaluation metrics
         """
         os.makedirs(self.output_path, exist_ok=True)
         output_file = os.path.join(self.output_path, "evaluation_results.txt")
@@ -111,20 +120,23 @@ class ModelEvaluator:
         print("Loading trained model...")
         model = self.load_model()
 
-        print("Evaluating model...")
+        print("Evaluating model")
+
         metrics = self.evaluate(model, test_data)
 
-        print("Saving evaluation results...")
+        print("Saving evaluation results")
         self.save_evaluation(metrics)
 
-        print("Evaluation completed.")
+        print("Evaluation completed")
         return metrics
 
 
 if __name__ == "__main__":
+
     # Define paths
     model_path = "../models/revenue_model.pkl"
-    features_path = "../data/processed/features.csv"  # Usar features en lugar de reported_cleaned
+    features_path = "../data/processed/features.csv"  
+
     revenue_path = "../data/processed/reported_cleaned.csv"
     output_path = "../reports/"
 
