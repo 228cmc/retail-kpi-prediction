@@ -28,7 +28,11 @@ class DataProcessor:
 
         # Removing the anomalous rows
         df_orders = df_orders[df_orders['order_diff'] >= 0]
+
         df_orders = df_orders.drop(columns=['order_diff'])
+
+        df_orders = df_orders[df_orders['order_number'] >= 20]
+
 
         return df_orders
 
