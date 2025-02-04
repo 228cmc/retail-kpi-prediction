@@ -38,7 +38,7 @@ Retail-KPI-Prediction/
 │   ├── evaluate_model.py
 │   └── utils.py
 │
-├── test/                         # Unit tests for the pipeline
+├── test/                    # Unit tests for the pipeline
 │   ├── test_cleaning.py
 │   ├── test_engineering.py
 │   └── test_train_model.py
@@ -58,6 +58,7 @@ To run the project, follow these steps:
 1. Set up a Python virtual environment:
    ```bash
    python -m venv venv
+
    source venv/bin/activate   # On Windows: venv\Scripts\activate
    ```
 
@@ -105,8 +106,7 @@ The **notebooks** folder includes detailed step-by-step documentation of the wor
 1. `01_data_exploration.ipynb`: Explore the dataset.  
 2. `02_data_processing.ipynb`: Clean and process the data.  
 3. `03_modelling.ipynb`: Train models.  
-4. `04_model_evaluation.ipynb`: Evaluate model performance.  
-5. `05_results_reporting.ipynb`: Present results and insights.
+4. `04_model_evaluation_and_results.ipynb`: Evaluate model performance.  
 
 
 
