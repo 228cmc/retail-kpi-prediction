@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-# Generar ruta absoluta para la carpeta `data/processed`
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROCESSED_PATH = os.path.abspath(os.path.join(BASE_DIR, "../data/processed/"))
 

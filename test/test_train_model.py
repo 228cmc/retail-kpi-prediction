@@ -1,7 +1,7 @@
 import os
 import joblib
 
-# Generar ruta absoluta para la carpeta `models`
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.abspath(os.path.join(BASE_DIR, "../models/"))
 
