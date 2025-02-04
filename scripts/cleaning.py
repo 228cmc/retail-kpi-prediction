@@ -31,13 +31,19 @@ class DataProcessor:
         Cleans the reported_data dataset.
         """
         df_reported = df_reported.copy()
+
         df_reported['start_date'] = pd.to_datetime(df_reported['start_date'])
         df_reported['end_date'] = pd.to_datetime(df_reported['end_date'])
+
+        df_reported['period'] = df_reported['period'].str.replace(" ", "", regex=False)
+        
         return df_reported
+
 
     def process(self):
         # Load datasets
         df_orders = pd.read_excel(self.raw_data_path, sheet_name="order_numbers")
+
         df_transactions = pd.read_excel(self.raw_data_path, sheet_name="transaction_data")
         df_reported = pd.read_excel(self.raw_data_path, sheet_name="reported_data")
 
