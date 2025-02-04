@@ -1,28 +1,14 @@
 import os
 import joblib
 
-class TestModelTraining:
+# Generar ruta absoluta para la carpeta `models`
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.abspath(os.path.join(BASE_DIR, "../models/"))
 
-    """Class to test the model training process."""
+def test_model_file():
+    """Test for the trained model file."""
+    file_path = os.path.join(MODEL_PATH, "revenue_model.pkl")
+    assert os.path.exists(file_path), "The trained model file does not exist."
 
-    def __init__(self, model_path):
-
-        self.model_path = model_path#
-
-    def test_model_file(self):
-        """Test for the trained model file."""
-        
-        file_path = os.path.join(self.model_path, "revenue_model.pkl")
-        assert os.path.exists(file_path), "The trained model file does not exist."
-        
-        # Try to load the model
-        model = joblib.load(file_path)
-        assert model is not None, "Failed to load the trained model."
-
-
-if __name__ == "__main__":
-
-    model_path = "../models/"
-    tester = TestModelTraining(model_path)
-    tester.test_model_file()
-    print("All training model tests passed!")
+    model = joblib.load(file_path)
+    assert model is not None, "Failed to load the trained model."
