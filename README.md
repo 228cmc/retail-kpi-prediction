@@ -29,8 +29,7 @@ Retail-KPI-Prediction/
 │   ├── 04_model_evaluation.ipynb
 │   └── 05_results_reporting.ipynb
 │
-├── reports/               # Project reports (if applicable)
-│
+├── reports/               # Project reports 
 ├── scripts/                # Core scripts for the pipeline
 │   ├── cleaning.py
 │   ├── engineering.py
